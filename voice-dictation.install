@@ -1,0 +1,43 @@
+post_install() {
+    echo "==> Installing additional Python dependencies..."
+    pip install --break-system-packages pynput soundfile python-dotenv 2>/dev/null || \
+    pip install pynput soundfile python-dotenv
+    
+    echo "==> Compiling GSettings schemas..."
+    glib-compile-schemas /usr/share/glib-2.0/schemas/
+    
+    echo ""
+    echo "==> Voice Dictation installed successfully!"
+    echo ""
+    echo "📝 Next steps:"
+    echo "    1. Install whisper.cpp (as your user, not root):"
+    echo "       /usr/share/voice-dictation/bin/install-whisper.sh"
+    echo ""
+    echo "    2. Configure settings: voice-dictation-settings"
+    echo "    3. Start dictation: voice-dictation"
+    echo "    4. Use hotkey: Ctrl+Shift+Space"
+}
+
+post_upgrade() {
+    echo "==> Updating Python dependencies..."
+    pip install --break-system-packages --upgrade pynput soundfile python-dotenv 2>/dev/null || \
+    pip install --upgrade pynput soundfile python-dotenv
+    
+    echo "==> Compiling GSettings schemas..."
+    glib-compile-schemas /usr/share/glib-2.0/schemas/
+    
+    echo ""
+    echo "✓ Voice Dictation upgraded successfully"
+}
+
+pre_remove() {
+    echo "==> Removing Python dependencies..."
+    pip uninstall -y pynput soundfile python-dotenv 2>/dev/null || true
+}
+
+post_remove() {
+    echo "==> Compiling GSettings schemas..."
+    glib-compile-schemas /usr/share/glib-2.0/schemas/
+    
+    echo "==> Voice Dictation removed."
+}

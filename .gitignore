@@ -50,7 +50,8 @@ config.json
 # Arch Build Files
 *.pkg.tar.zst
 pkg/
-src/
+# Keep src/ directory (source code)
+# src/ is for makepkg build, not our source code
 
 # Temporary files
 *.tmp

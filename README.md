@@ -32,14 +32,31 @@ A simple, iOS-like dictation feature for Linux with GNOME integration, powered b
 git clone https://github.com/blackbunt/voice-dictation.git
 cd voice-dictation
 
-# 2. Build and install Arch package
-./bin/install-pkg.sh
+# 2. Build and install package
+./build.sh
 
 # 3. Install whisper.cpp
 ./bin/install-whisper.sh
 
 # 4. Done! Start Voice Dictation
 voice-dictation
+```
+
+### Alternative: Using install-pkg.sh
+
+```bash
+# Automated build and install
+./bin/install-pkg.sh
+```
+
+### Manual Build
+
+```bash
+# Build package
+makepkg -sf
+
+# Install package
+sudo pacman -U voice-dictation-*.pkg.tar.zst
 ```
 
 ### Manual Installation
@@ -120,7 +137,7 @@ nano ~/.config/voice-dictation/config.json
 ```
 voice-dictation/
 ├── bin/                          # Installation scripts
-│   ├── install-pkg.sh            # Build & install Arch package
+│   ├── install-pkg.sh            # Automated build & install
 │   ├── install-whisper.sh        # whisper.cpp setup
 │   ├── post-install.sh           # Post-installation
 │   └── setup.sh                  # Manual setup
@@ -137,6 +154,7 @@ voice-dictation/
 │   └── requirements.txt          # Python dependencies
 ├── .github/
 │   └── copilot-instructions.md   # GitHub Copilot guidelines
+├── build.sh                      # Quick build script
 ├── PKGBUILD                      # Arch Linux package
 ├── .SRCINFO                      # AUR metadata
 └── .gitignore

@@ -28,14 +28,14 @@ fi
 echo ""
 echo "🔨 Building whisper.cpp..."
 cd "$INSTALL_DIR/whisper.cpp"
-make clean
+make clean 2>/dev/null || true
 make
 
 # Install to local bin
 echo ""
-echo "📦 Installing whisper-cpp nach $BIN_DIR..."
-cp main "$BIN_DIR/whisper-cpp"
-chmod +x "$BIN_DIR/whisper-cpp"
+echo "📦 Installing whisper-cli to $BIN_DIR..."
+cp build/bin/whisper-cli "$BIN_DIR/whisper-cli"
+chmod +x "$BIN_DIR/whisper-cli"
 
 # Add to PATH if not already there
 if [[ ":$PATH:" != *":$BIN_DIR:"* ]]; then
@@ -68,19 +68,20 @@ read -p "Welches Modell möchtest du? [base]: " MODEL
 MODEL=${MODEL:-base}
 
 if [ ! -f "$MODEL_DIR/ggml-$MODEL.bin" ]; then
-    echo "📥 Lade ggml-$MODEL.bin herunter..."
-    wget -P "$MODEL_DIR" "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-$MODEL.bin"
-    echo "✅ Modell heruntergeladen: $MODEL_DIR/ggml-$MODEL.bin"
+    echo "📥 Downloading ggml-$MODEL.bin..."
+    bash "$INSTALL_DIR/whisper.cpp/models/download-ggml-model.sh" "$MODEL"
+    echo "✅ Model downloaded: $MODEL_DIR/ggml-$MODEL.bin"
 else
-    echo "✓ Modell bereits vorhanden: $MODEL_DIR/ggml-$MODEL.bin"
+    echo "✓ Model already exists: $MODEL_DIR/ggml-$MODEL.bin"
 fi
 
 echo ""
 echo "✅ whisper.cpp Installation complete!"
 echo ""
-echo "📝 Konfiguriere jetzt config.json:"
+echo "📝 Configure voice-dictation-settings or config.json:"
 echo "   \"model\": \"$MODEL\""
-echo "   \"whisper_cpp_path\": \"$BIN_DIR/whisper-cpp\""
-echo "   \"model_path\": \"$MODEL_DIR\""
+echo "   \"whisper_cpp_path\": \"$BIN_DIR/whisper-cli\""
+echo "   \"model_path\": \"$HOME/.local/share/whisper/whisper.cpp/models\""
 echo ""
-echo "📦 Voice Dictation Installation"
+echo "🎙️  Start: voice-dictation"
+echo "⌨️  Hotkey: Ctrl+Shift+Space"

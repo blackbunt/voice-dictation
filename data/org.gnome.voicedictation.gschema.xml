@@ -65,24 +65,20 @@
     
     <key name="sample-rate" type="i">
       <default>16000</default>
-      <choices>
-        <choice value='16000'/>
-        <choice value='44100'/>
-        <choice value='48000'/>
-      </choices>
+      <range min="16000" max="48000"/>
       <summary>Sample Rate</summary>
       <description>Audio sample rate in Hz (whisper requires 16000)</description>
     </key>
     
     <!-- Paths -->
     <key name="whisper-cpp-path" type="s">
-      <default>'/usr/bin/whisper-cpp'</default>
+      <default>'~/.local/bin/whisper-cli'</default>
       <summary>Whisper.cpp Path</summary>
       <description>Path to the whisper-cpp executable</description>
     </key>
     
     <key name="model-path" type="s">
-      <default>'~/.local/share/whisper/models'</default>
+      <default>'~/.local/share/whisper/whisper.cpp/models'</default>
       <summary>Model Directory</summary>
       <description>Directory containing whisper model files</description>
     </key>

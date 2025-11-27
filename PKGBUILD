@@ -16,39 +16,42 @@ depends=(
     'portaudio'
     'tk'
 )
-makedepends=('python-setuptools' 'git' 'make' 'gcc')
-optdepends=(
-    'whisper.cpp: Local speech recognition engine (required, built from source)'
-)
+makedepends=('python-setuptools' 'git' 'make' 'gcc' 'python-build' 'python-installer' 'python-wheel')
+install=voice-dictation.install
 source=()
 sha256sums=()
 
 package() {
     # Create installation directories
     install -dm755 "${pkgdir}/usr/share/${pkgname}"
+    install -dm755 "${pkgdir}/usr/share/${pkgname}/bin"
     install -dm755 "${pkgdir}/usr/bin"
     install -dm755 "${pkgdir}/usr/share/applications"
     install -dm755 "${pkgdir}/usr/share/doc/${pkgname}"
     install -dm755 "${pkgdir}/usr/share/glib-2.0/schemas"
     
     # Install main script
-    install -Dm755 "${srcdir}/../../src/dictate.py" "${pkgdir}/usr/share/${pkgname}/dictate.py"
+    install -Dm755 "${startdir}/src/dictate.py" "${pkgdir}/usr/share/${pkgname}/dictate.py"
     
     # Install settings GUI
-    install -Dm755 "${srcdir}/../../src/voice-dictation-settings.py" "${pkgdir}/usr/share/${pkgname}/voice-dictation-settings.py"
+    install -Dm755 "${startdir}/src/voice-dictation-settings.py" "${pkgdir}/usr/share/${pkgname}/voice-dictation-settings.py"
+    
+    # Install helper scripts
+    install -Dm755 "${startdir}/bin/install-whisper.sh" "${pkgdir}/usr/share/${pkgname}/bin/install-whisper.sh"
+    install -Dm755 "${startdir}/bin/setup.sh" "${pkgdir}/usr/share/${pkgname}/bin/setup.sh"
     
     # Install GSettings schema
-    install -Dm644 "${srcdir}/../../data/org.gnome.voicedictation.gschema.xml" \
+    install -Dm644 "${startdir}/data/org.gnome.voicedictation.gschema.xml" \
         "${pkgdir}/usr/share/glib-2.0/schemas/org.gnome.voicedictation.gschema.xml"
     
     # Install configuration example
-    install -Dm644 "${srcdir}/../../data/config.json.example" "${pkgdir}/usr/share/${pkgname}/config.json.example"
+    install -Dm644 "${startdir}/data/config.json.example" "${pkgdir}/usr/share/${pkgname}/config.json.example"
     
     # Install requirements.txt for reference
-    install -Dm644 "${srcdir}/../../docs/requirements.txt" "${pkgdir}/usr/share/doc/${pkgname}/requirements.txt"
+    install -Dm644 "${startdir}/docs/requirements.txt" "${pkgdir}/usr/share/doc/${pkgname}/requirements.txt"
     
     # Install README
-    install -Dm644 "${srcdir}/../../README.md" "${pkgdir}/usr/share/doc/${pkgname}/README.md"
+    install -Dm644 "${startdir}/README.md" "${pkgdir}/usr/share/doc/${pkgname}/README.md"
     
     # Create wrapper script for dictation service
     cat > "${pkgdir}/usr/bin/voice-dictation" << 'EOF'

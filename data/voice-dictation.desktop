@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=Voice Dictation
-Comment=Systemweite Spracheingabe für Linux
-Exec=/usr/bin/python /home/bernie/Repo/text2speech-local/dictate.py
+Comment=System-wide voice input for Linux
+Exec=voice-dictation
 Icon=audio-input-microphone
 Terminal=false
 Categories=Utility;Accessibility;

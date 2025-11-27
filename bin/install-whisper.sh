@@ -26,14 +26,14 @@ fi
 
 # Build whisper.cpp
 echo ""
-echo "🔨 Baue whisper.cpp..."
+echo "🔨 Building whisper.cpp..."
 cd "$INSTALL_DIR/whisper.cpp"
 make clean
 make
 
 # Install to local bin
 echo ""
-echo "📦 Installiere whisper-cpp nach $BIN_DIR..."
+echo "📦 Installing whisper-cpp nach $BIN_DIR..."
 cp main "$BIN_DIR/whisper-cpp"
 chmod +x "$BIN_DIR/whisper-cpp"
 
@@ -47,7 +47,7 @@ if [[ ":$PATH:" != *":$BIN_DIR:"* ]]; then
     echo
     if [[ $REPLY =~ ^[JjYy]$ ]]; then
         echo "" >> ~/.zshrc
-        echo "# Voice Dictation - whisper.cpp" >> ~/.zshrc
+        echo "📦 Voice Dictation Installation"
         echo "export PATH=\"\$HOME/.local/bin:\$PATH\"" >> ~/.zshrc
         echo "✅ PATH aktualisiert. Bitte öffne ein neues Terminal."
     fi
@@ -76,11 +76,11 @@ else
 fi
 
 echo ""
-echo "✅ whisper.cpp Installation abgeschlossen!"
+echo "✅ whisper.cpp Installation complete!"
 echo ""
 echo "📝 Konfiguriere jetzt config.json:"
 echo "   \"model\": \"$MODEL\""
 echo "   \"whisper_cpp_path\": \"$BIN_DIR/whisper-cpp\""
 echo "   \"model_path\": \"$MODEL_DIR\""
 echo ""
-echo "🚀 Starte Voice Dictation mit: python dictate.py"
+echo "📦 Voice Dictation Installation"

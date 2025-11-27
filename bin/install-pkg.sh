@@ -3,7 +3,7 @@
 
 set -e
 
-echo "📦 Voice Dictation - Arch Package Builder"
+echo "📦 Voice Dictation Installation"
 echo "=========================================="
 echo ""
 
@@ -15,43 +15,43 @@ fi
 
 # Install base-devel if needed
 if ! pacman -Qq base-devel &> /dev/null; then
-    echo "📦 Installiere base-devel..."
+    echo "📦 Installing base-devel..."
     sudo pacman -S --needed base-devel
 fi
 
 # Build the package
-echo "🔨 Baue Paket..."
+echo "🔨 Building Package..."
 makepkg -sf
 
 # Find the built package
 PKG_FILE=$(ls -t voice-dictation-*.pkg.tar.zst 2>/dev/null | head -n1)
 
 if [ -z "$PKG_FILE" ]; then
-    echo "❌ Paket konnte nicht gebaut werden"
+    echo "❌ Package konnte nicht gebaut werden"
     exit 1
 fi
 
 echo ""
-echo "✅ Paket gebaut: $PKG_FILE"
+echo "✅ Package gebaut: $PKG_FILE"
 echo ""
 
 # Ask to install
-read -p "❓ Paket installieren? (j/n): " -n 1 -r
+read -p "❓ Package installieren? (j/n): " -n 1 -r
 echo
 if [[ $REPLY =~ ^[JjYy]$ ]]; then
     sudo pacman -U "$PKG_FILE"
     
     echo ""
-    echo "✅ Installation abgeschlossen!"
+    echo "✅ Installation complete!"
     echo ""
     echo "📝 Als nächstes:"
-    echo "   1. Installiere Python-Abhängigkeiten:"
+    echo "   1. Installing Python-Abhängigkeiten:"
     echo "      pip install --user speech_recognition pynput keyboard python-dotenv"
     echo ""
-    echo "   2. Starte Voice Dictation:"
+    echo "📦 Voice Dictation Installation"
     echo "      voice-dictation"
     echo ""
-    echo "   3. Konfiguration anpassen:"
+    echo "   3. Configuration anpassen:"
     echo "      nano ~/.config/voice-dictation/config.json"
     echo ""
     echo "   4. Autostart aktivieren:"

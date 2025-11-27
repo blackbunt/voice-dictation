@@ -1,242 +1,242 @@
 # Voice Dictation for Linux
 
-Eine einfache, iOS-ähnliche Diktierfunktion für Linux mit GNOME Integration, angetrieben von whisper.cpp.
+A simple, iOS-like dictation feature for Linux with GNOME integration, powered by whisper.cpp.
 
 ## 🎯 Features
 
-- 🎤 **Toggle-Hotkey**: Drücke Ctrl+Shift+Space zum Starten/Stoppen
-- 🤫 **Auto-Stop bei Stille**: Automatisches Beenden nach 2 Sekunden Stille
-- 🌐 **Komplett Offline**: Verwendet whisper.cpp - keine Cloud, keine Daten verlassen deinen PC
-- 🔌 **Systemweit**: Funktioniert in jeder Anwendung
-- ⚙️ **GNOME Integration**: Native Settings-App für einfache Konfiguration
-- 🇩🇪 **Mehrsprachig**: Deutsch, English, Español, Français, und mehr
-- 📦 **Arch Package**: Saubere Installation via PKGBUILD
+- 🎤 **Toggle Hotkey**: Press Ctrl+Shift+Space to start/stop recording
+- 🤫 **Auto-Stop on Silence**: Automatically ends after 2 seconds of silence
+- 🌐 **Completely Offline**: Uses whisper.cpp - no cloud, your data never leaves your PC
+- 🔌 **System-wide**: Works in any application
+- ⚙️ **GNOME Integration**: Native settings app for easy configuration
+- � **Multi-language**: German, English, Spanish, French, and more
+- 📦 **Arch Package**: Clean installation via PKGBUILD
 
-## 📸 Verwendung
+## 📸 Usage
 
-### Simpel wie unter iOS:
+### Simple as on iOS:
 
-1. **Tastenkürzel drücken** → Aufnahme startet 🔴
-2. **Sprechen** (Deutsch oder andere Sprache)
-3. **Stille (2 Sek.)** → Aufnahme stoppt automatisch ⏹️
-4. **Text erscheint** an der Cursor-Position ✨
+1. **Press hotkey** → Recording starts 🔴
+2. **Speak** (in German, English, or any supported language)
+3. **Silence (2 sec)** → Recording stops automatically ⏹️
+4. **Text appears** at cursor position ✨
 
-**Alternativ:** Tastenkürzel erneut drücken zum manuellen Stoppen.
+**Alternative:** Press hotkey again to stop manually.
 
 ## 🚀 Installation (Arch Linux)
 
-### Schnellinstallation
+### Quick Installation
 
 ```bash
-# 1. Repository klonen
-git clone https://github.com/yourusername/voice-dictation.git
+# 1. Clone repository
+git clone https://github.com/blackbunt/voice-dictation.git
 cd voice-dictation
 
-# 2. Arch-Paket bauen und installieren
+# 2. Build and install Arch package
 ./bin/install-pkg.sh
 
-# 3. whisper.cpp installieren
+# 3. Install whisper.cpp
 ./bin/install-whisper.sh
 
-# 4. Fertig! Starte Voice Dictation
+# 4. Done! Start Voice Dictation
 voice-dictation
 ```
 
-### Manuelle Installation
+### Manual Installation
 
-#### Schritt 1: System-Dependencies
+#### Step 1: System Dependencies
 
 ```bash
 sudo pacman -S --needed python python-pip python-pyaudio python-numpy \
                          python-gobject libadwaita portaudio tk base-devel git
 ```
 
-#### Schritt 2: Python-Pakete
+#### Step 2: Python Packages
 
 ```bash
 pip install --user -r docs/requirements.txt
 ```
 
-#### Schritt 3: whisper.cpp kompilieren
+#### Step 3: Compile whisper.cpp
 
 ```bash
-# Automatisch
+# Automatic
 ./bin/install-whisper.sh
 
-# Oder manuell
+# Or manual
 git clone https://github.com/ggerganov/whisper.cpp.git
 cd whisper.cpp
 make
 sudo cp main /usr/local/bin/whisper-cpp
 
-# Modell herunterladen (z.B. base)
+# Download model (e.g. base)
 mkdir -p ~/.local/share/whisper/models
 cd ~/.local/share/whisper/models
 wget https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin
 ```
 
-#### Schritt 4: GSettings Schema installieren
+#### Step 4: Install GSettings Schema
 
 ```bash
 sudo cp data/org.gnome.voicedictation.gschema.xml /usr/share/glib-2.0/schemas/
 sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 ```
 
-## ⚙️ Konfiguration
+## ⚙️ Configuration
 
-### GNOME Settings GUI (empfohlen)
+### GNOME Settings GUI (recommended)
 
 ```bash
 voice-dictation-settings
 ```
 
-Die Settings-App erscheint auch in deinen GNOME-Einstellungen unter "Anwendungen".
+The settings app also appears in your GNOME Settings under "Applications".
 
-**Verfügbare Einstellungen:**
+**Available Settings:**
 
-- 🎹 **Hotkey**: Tastenkombination ändern (Standard: Ctrl+Shift+Space)
-- 🌍 **Sprache**: Deutsch, English, Español, Français, Italiano, Nederlands, Polski, Português, Русский
-- 🧠 **Whisper-Modell**:
-  - `tiny` (75 MB) - Schnellst, niedrigste Qualität
-  - `base` (142 MB) - **Empfohlen** für Tests
-  - `small` (466 MB) - Gut für Produktion
-  - `medium` (1.5 GB) - Sehr gute Qualität
-  - `large` (2.9 GB) - Beste Qualität, langsam
-- 🤫 **Stille-Erkennung**: Schwellwert und Dauer anpassen
-- 🔊 **Audio**: Sample-Rate konfigurieren
-- 🚀 **Autostart**: Automatisch bei Anmeldung starten
+- 🎹 **Hotkey**: Change keyboard shortcut (Default: Ctrl+Shift+Space)
+- 🌍 **Language**: German, English, Spanish, French, Italian, Dutch, Polish, Portuguese, Russian
+- 🧠 **Whisper Model**:
+  - `tiny` (75 MB) - Fastest, lowest quality
+  - `base` (142 MB) - **Recommended** for testing
+  - `small` (466 MB) - Good for production
+  - `medium` (1.5 GB) - Very good quality
+  - `large` (2.9 GB) - Best quality, slow
+- 🤫 **Silence Detection**: Adjust threshold and duration
+- 🔊 **Audio**: Configure sample rate
+- 🚀 **Autostart**: Start automatically on login
 
-### Manuelle Konfiguration (Optional)
+### Manual Configuration (Optional)
 
-Falls GSettings nicht verfügbar ist, nutzt das System `config.json`:
+If GSettings is not available, the system uses `config.json`:
 
 ```bash
 cp data/config.json.example ~/.config/voice-dictation/config.json
 nano ~/.config/voice-dictation/config.json
 ```
 
-## 📁 Projekt-Struktur
+## 📁 Project Structure
 
 ```
 voice-dictation/
-├── bin/                          # Installations-Skripte
-│   ├── install-pkg.sh            # Arch-Paket bauen & installieren
-│   ├── install-whisper.sh        # whisper.cpp Setup
-│   ├── post-install.sh           # Post-Installation
-│   └── setup.sh                  # Manuelles Setup
-├── src/                          # Quellcode
-│   ├── dictate.py                # Hauptprogramm
+├── bin/                          # Installation scripts
+│   ├── install-pkg.sh            # Build & install Arch package
+│   ├── install-whisper.sh        # whisper.cpp setup
+│   ├── post-install.sh           # Post-installation
+│   └── setup.sh                  # Manual setup
+├── src/                          # Source code
+│   ├── dictate.py                # Main program
 │   └── voice-dictation-settings.py  # Settings GUI
-├── data/                         # Daten & Konfiguration
-│   ├── org.gnome.voicedictation.gschema.xml  # GSettings Schema
-│   ├── config.json.example       # Beispiel-Konfiguration
-│   ├── voice-dictation.desktop   # Desktop-Entry (Service)
-│   └── voice-dictation-settings.desktop  # Desktop-Entry (Settings)
-├── docs/                         # Dokumentation
-│   ├── README.md                 # Diese Datei
-│   └── requirements.txt          # Python-Dependencies
+├── data/                         # Data & configuration
+│   ├── org.gnome.voicedictation.gschema.xml  # GSettings schema
+│   ├── config.json.example       # Example configuration
+│   ├── voice-dictation.desktop   # Desktop entry (service)
+│   └── voice-dictation-settings.desktop  # Desktop entry (settings)
+├── docs/                         # Documentation
+│   ├── README.md                 # This file
+│   └── requirements.txt          # Python dependencies
 ├── .github/
-│   └── copilot-instructions.md   # GitHub Copilot Richtlinien
-├── PKGBUILD                      # Arch Linux Paket
-├── .SRCINFO                      # AUR Metadaten
+│   └── copilot-instructions.md   # GitHub Copilot guidelines
+├── PKGBUILD                      # Arch Linux package
+├── .SRCINFO                      # AUR metadata
 └── .gitignore
 ```
 
-## 🔧 Technische Details
+## 🔧 Technical Details
 
-### Architektur
+### Architecture
 
 ```
-Hotkey (keyboard) → Audio-Aufnahme (pyaudio) → Stille-Erkennung (numpy)
+Hotkey (keyboard) → Audio Recording (pyaudio) → Silence Detection (numpy)
                                                       ↓
-                    Texteingabe (pynput) ← whisper.cpp (Transkription)
+                    Text Insertion (pynput) ← whisper.cpp (Transcription)
 ```
 
 ### Workflow
 
-1. **Hotkey-Registrierung**: Global via `keyboard` Modul
-2. **Audio-Capture**: 16kHz Mono via `pyaudio`
-3. **RMS-Berechnung**: Echtzeit-Lautstärke-Analyse mit `numpy`
-4. **Auto-Stop**: Nach 2 Sek. unter Schwellwert
-5. **WAV-Export**: Temporäre Datei für whisper.cpp
-6. **Transkription**: Offline via whisper.cpp
-7. **Text-Injection**: Systemweite Keyboard-Simulation
+1. **Hotkey Registration**: Global via `keyboard` module
+2. **Audio Capture**: 16kHz mono via `pyaudio`
+3. **RMS Calculation**: Real-time volume analysis with `numpy`
+4. **Auto-Stop**: After 2 sec below threshold
+5. **WAV Export**: Temporary file for whisper.cpp
+6. **Transcription**: Offline via whisper.cpp
+7. **Text Injection**: System-wide keyboard simulation
 
-### Whisper-Modelle
+### Whisper Models
 
-| Modell   | Größe  | Geschwindigkeit | Qualität | Empfehlung |
-|----------|--------|-----------------|----------|------------|
-| tiny     | 75 MB  | ⚡⚡⚡⚡⚡        | ⭐⭐      | Test       |
-| base     | 142 MB | ⚡⚡⚡⚡          | ⭐⭐⭐    | **Start**  |
-| small    | 466 MB | ⚡⚡⚡           | ⭐⭐⭐⭐  | Produktion |
-| medium   | 1.5 GB | ⚡⚡             | ⭐⭐⭐⭐⭐ | High-End   |
-| large    | 2.9 GB | ⚡              | ⭐⭐⭐⭐⭐ | Beste      |
+| Model  | Size   | Speed     | Quality | Recommendation |
+|--------|--------|-----------|---------|----------------|
+| tiny   | 75 MB  | ⚡⚡⚡⚡⚡  | ⭐⭐    | Testing        |
+| base   | 142 MB | ⚡⚡⚡⚡    | ⭐⭐⭐  | **Start here** |
+| small  | 466 MB | ⚡⚡⚡     | ⭐⭐⭐⭐ | Production     |
+| medium | 1.5 GB | ⚡⚡       | ⭐⭐⭐⭐⭐| High-End      |
+| large  | 2.9 GB | ⚡        | ⭐⭐⭐⭐⭐| Best          |
 
 ## 🐛 Troubleshooting
 
-### Mikrofon wird nicht erkannt
+### Microphone not detected
 
 ```bash
-# Verfügbare Geräte anzeigen
+# Show available devices
 arecord -l
 
-# PulseAudio Mixer öffnen
+# Open PulseAudio mixer
 pavucontrol
 ```
 
-### whisper.cpp nicht gefunden
+### whisper.cpp not found
 
 ```bash
-# Pfad überprüfen
+# Check path
 which whisper-cpp
 
-# In Settings GUI korrigieren oder:
-gsettings set org.gnome.voicedictation whisper-cpp-path "/pfad/zu/whisper-cpp"
+# Fix in settings GUI or:
+gsettings set org.gnome.voicedictation whisper-cpp-path "/path/to/whisper-cpp"
 ```
 
-### Modell fehlt
+### Model missing
 
 ```bash
-# Herunterladen
+# Download
 cd ~/.local/share/whisper/models
 wget https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin
 ```
 
-### Keine Audio-Eingabe
+### No audio input
 
 ```bash
-# PyAudio neu installieren
+# Reinstall PyAudio
 pip uninstall pyaudio
 pip install pyaudio
 ```
 
-### GSettings Schema nicht gefunden
+### GSettings schema not found
 
 ```bash
-# Schema neu kompilieren
+# Recompile schema
 sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 ```
 
-## 🤝 Beitragen
+## 🤝 Contributing
 
-Contributions sind willkommen! Bitte:
+Contributions are welcome! Please:
 
-1. Fork das Repository
-2. Erstelle einen Feature-Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit deine Änderungen (`git commit -m 'Add AmazingFeature'`)
-4. Push zum Branch (`git push origin feature/AmazingFeature`)
-5. Öffne einen Pull Request
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📝 Lizenz
+## 📝 License
 
-MIT License - siehe [LICENSE](LICENSE) für Details.
+MIT License - see [LICENSE](LICENSE) for details.
 
-## 🙏 Danksagungen
+## 🙏 Acknowledgments
 
-- [whisper.cpp](https://github.com/ggerganov/whisper.cpp) - Schnelle Whisper-Implementierung
-- [OpenAI Whisper](https://github.com/openai/whisper) - Original Whisper-Modell
+- [whisper.cpp](https://github.com/ggerganov/whisper.cpp) - Fast whisper implementation
+- [OpenAI Whisper](https://github.com/openai/whisper) - Original whisper model
 - GNOME Project - GTK & Libadwaita
 
 ## 💡 Inspiration
 
-Dieses Projekt wurde inspiriert von der simplen und effektiven Spracheingabe unter iOS.
+This project was inspired by the simple and effective voice input on iOS.

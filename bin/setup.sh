@@ -1,7 +1,7 @@
 #!/bin/bash
 # Setup script for Voice Dictation
 
-echo "🎤 Voice Dictation Setup für Linux"
+echo "📦 Voice Dictation Installation"
 echo "==================================="
 echo ""
 
@@ -12,7 +12,7 @@ if [[ "$OSTYPE" != "linux-gnu"* ]]; then
 fi
 
 # Install system dependencies
-echo "📦 Installiere System-Abhängigkeiten..."
+echo "📦 Installing System-Abhängigkeiten..."
 if command -v pacman &> /dev/null; then
     sudo pacman -S --needed --noconfirm python python-pip python-pyaudio portaudio tk
 elif command -v yay &> /dev/null; then
@@ -28,13 +28,13 @@ fi
 
 # Install Python dependencies
 echo ""
-echo "🐍 Installiere Python-Pakete..."
+echo "🐍 Installing Python-Packagee..."
 pip install --user -r requirements.txt
 
 # Create config if not exists
 if [ ! -f "config.json" ]; then
     echo ""
-    echo "⚙️ Erstelle Standard-Konfiguration..."
+    echo "⚙️ Erstelle Standard-Configuration..."
     cp config.json.example config.json
 fi
 
@@ -54,9 +54,9 @@ if [[ $REPLY =~ ^[JjYy]$ ]]; then
 fi
 
 echo ""
-echo "✅ Installation abgeschlossen!"
+echo "✅ Installation complete!"
 echo ""
-echo "🚀 Starten mit: python dictate.py"
+echo "🚀 Start with: python dictate.py"
 echo "⌨️  Standard Hotkey: Ctrl+Shift+Space"
 echo ""
 echo "💡 Tipp: Passe config.json an für eigene Einstellungen"

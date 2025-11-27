@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Voice Dictation Einstellungen
+Comment=Voice Dictation konfigurieren
+Exec=voice-dictation-settings
+Icon=preferences-desktop-keyboard-shortcuts
+Terminal=false
+Categories=Settings;GNOME;GTK;Audio;Accessibility;
+Keywords=voice;speech;dictation;whisper;hotkey;sprache;diktat;
+StartupNotify=true

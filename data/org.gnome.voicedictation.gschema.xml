@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.voicedictation" path="/org/gnome/voicedictation/">
+    
+    <!-- General Settings -->
+    <key name="enabled" type="b">
+      <default>true</default>
+      <summary>Enable Voice Dictation</summary>
+      <description>Enable or disable the voice dictation service</description>
+    </key>
+    
+    <!-- Hotkey Configuration -->
+    <key name="hotkey" type="s">
+      <default>'&lt;Ctrl&gt;&lt;Shift&gt;space'</default>
+      <summary>Activation Hotkey</summary>
+      <description>Keyboard shortcut to start/stop voice recording</description>
+    </key>
+    
+    <!-- Language Settings -->
+    <key name="language" type="s">
+      <choices>
+        <choice value='de'/>
+        <choice value='en'/>
+        <choice value='es'/>
+        <choice value='fr'/>
+        <choice value='it'/>
+        <choice value='nl'/>
+        <choice value='pl'/>
+        <choice value='pt'/>
+        <choice value='ru'/>
+      </choices>
+      <default>'de'</default>
+      <summary>Recognition Language</summary>
+      <description>Language used for speech recognition</description>
+    </key>
+    
+    <!-- Whisper Model -->
+    <key name="model" type="s">
+      <choices>
+        <choice value='tiny'/>
+        <choice value='base'/>
+        <choice value='small'/>
+        <choice value='medium'/>
+        <choice value='large'/>
+      </choices>
+      <default>'base'</default>
+      <summary>Whisper Model</summary>
+      <description>Whisper model to use (larger = better quality, slower)</description>
+    </key>
+    
+    <!-- Audio Settings -->
+    <key name="silence-threshold" type="i">
+      <default>500</default>
+      <range min="100" max="2000"/>
+      <summary>Silence Threshold</summary>
+      <description>Audio level below which is considered silence (RMS value)</description>
+    </key>
+    
+    <key name="silence-duration" type="d">
+      <default>2.0</default>
+      <range min="0.5" max="5.0"/>
+      <summary>Silence Duration</summary>
+      <description>Seconds of silence before auto-stopping recording</description>
+    </key>
+    
+    <key name="sample-rate" type="i">
+      <default>16000</default>
+      <choices>
+        <choice value='16000'/>
+        <choice value='44100'/>
+        <choice value='48000'/>
+      </choices>
+      <summary>Sample Rate</summary>
+      <description>Audio sample rate in Hz (whisper requires 16000)</description>
+    </key>
+    
+    <!-- Paths -->
+    <key name="whisper-cpp-path" type="s">
+      <default>'/usr/bin/whisper-cpp'</default>
+      <summary>Whisper.cpp Path</summary>
+      <description>Path to the whisper-cpp executable</description>
+    </key>
+    
+    <key name="model-path" type="s">
+      <default>'~/.local/share/whisper/models'</default>
+      <summary>Model Directory</summary>
+      <description>Directory containing whisper model files</description>
+    </key>
+    
+    <!-- UI Settings -->
+    <key name="show-notifications" type="b">
+      <default>true</default>
+      <summary>Show Notifications</summary>
+      <description>Show desktop notifications during recording and transcription</description>
+    </key>
+    
+    <key name="autostart" type="b">
+      <default>false</default>
+      <summary>Start on Login</summary>
+      <description>Automatically start voice dictation on system login</description>
+    </key>
+    
+  </schema>
+</schemalist>

@@ -1,0 +1,16 @@
+pkgbase = voice-dictation
+	pkgdesc = iOS-like voice dictation for Linux with hotkey activation
+	pkgver = 1.0.0
+	pkgrel = 1
+	url = https://github.com/yourusername/voice-dictation
+	arch = any
+	license = MIT
+	makedepends = python-setuptools
+	depends = python
+	depends = python-pip
+	depends = python-pyaudio
+	depends = portaudio
+	depends = tk
+	optdepends = python-pocketsphinx: Offline speech recognition support
+
+pkgname = voice-dictation

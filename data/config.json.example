@@ -1,0 +1,11 @@
+{
+  "hotkey": "ctrl+shift+space",
+  "language": "de",
+  "model": "base",
+  "whisper_cpp_path": "/usr/bin/whisper-cpp",
+  "model_path": "~/.local/share/whisper/models",
+  "silence_threshold": 500,
+  "silence_duration": 2.0,
+  "sample_rate": 16000,
+  "channels": 1
+}
